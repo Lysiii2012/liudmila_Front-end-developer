@@ -53,7 +53,7 @@ var swiper = new Swiper('.blog-slider', {
         window.scrollTo(0, 0); // cheating
       });
     
-      var navLinks = document.querySelector(".nav-links  li");
+      var navLinks = document.querySelector(".nav-links ~ ul li");
       navLinks.forEach(function(link) {
         link.addEventListener("click", function() {
           nav.forEach(i => {
