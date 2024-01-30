@@ -1,21 +1,64 @@
 <?php
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $text = $_POST['text'];
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
 
-	$to = "lysiii2012@gmail.com"; 
-	$date = date ("d.m.Y"); 
-	$time = date ("h:i");
-	$from = $email;
-	$subject = "Заявка c сайта";
+	require 'phpmailer/src/Exception.php';
+	require 'phpmailer/src/PHPMailer.php';
+	require 'phpmailer/src/SMTP.php';
 
+	$mail = new PHPMailer(true);
+	$mail->CharSet = 'UTF-8';
+	$mail->setLanguage('ru', 'phpmailer/language/');
+	$mail->IsHTML(true);
+
+	/*
+	$mail->isSMTP();                                            //Send using SMTP
+	$mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
+	$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+	$mail->Username   = 'user@example.com';                     //SMTP username
+	$mail->Password   = 'secret';                               //SMTP password
+	$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+	$mail->Port       = 465;                 
+	*/
+
+	//От кого письмо
+	$mail->setFrom('animeshop@4b.o-trend.com', 'animeshop'); // Указать нужный E-mail
+	//Кому отправить
+	$mail->addAddress('lysiii2012@gmail.com'); // Указать нужный E-mail
+	//Тема письма
+	$mail->Subject = 'animeshop! Это "animeshop"';
+
+	// Пол
+	$gender = "Мужчина";
+	if($_POST['gender'] == "woman"){
+		$gender = "Женщина";
+	}
+
+	//Тело письма
+	$body = '<h1>Встречайте супер письмо!</h1>';
 	
-	$msg="
-    ФИО: $name /n
-    Почта: $email /n
-    Текст: $text"; 	
-	mail($to, $subject, $msg, "From: $from ");
+	if(trim(!empty($_POST['name']))){
+		$body.='<p><strong>Имя:</strong> '.$_POST['name'].'</p>';
+	}	
+	if(trim(!empty($_POST['email']))){
+		$body.='<p><strong>E-mail:</strong> '.$_POST['email'].'</p>';
+	}
+	if(trim(!empty($_POST['message']))){
+		$body.='<p><strong>Сообщение:</strong> '.$_POST['message'].'</p>';
+	}
+	
 
+	$mail->Body = $body;
+
+	//Отправляем
+	if (!$mail->send()) {
+		$message = 'Ошибка';
+	} else {
+		$message = 'Данные отправлены!';
+	}
+
+	$response = ['message' => $message];
+
+	header('Content-type: application/json');
+	echo json_encode($response);
 ?>
-
-<p>Привет, форма отправлена</p>
