@@ -41,11 +41,13 @@ var swiper = new Swiper('.blog-slider', {
     
     function toggleMenu() {
       var drop = document.getElementById("drop");
-      var nav = document.querySelector(".burger");
+      var nav = document.querySelectorAll(".burger span");
       var body = document.body;
     
       drop.addEventListener("click", function() {
-        nav.classList.toggle("open");
+        nav.forEach(i => {
+          i.classList.toggle("open");
+        })
         drop.querySelector("span").classList.toggle("open");
         body.classList.toggle("hidden");
         window.scrollTo(0, 0); // cheating
@@ -54,7 +56,9 @@ var swiper = new Swiper('.blog-slider', {
       var navLinks = document.querySelector(".nav-links  li");
       navLinks.forEach(function(link) {
         link.addEventListener("click", function() {
-          nav.classList.toggle("open");
+          nav.forEach(i => {
+            i.classList.toggle("open");
+          })
           drop.querySelector("span").classList.toggle("open");
           body.classList.toggle("hidden");
           window.scrollTo(0, 0); // cheating
