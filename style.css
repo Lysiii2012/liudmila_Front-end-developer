@@ -1226,19 +1226,23 @@ html{
   }
   .nav-bar{
     display: none;
+    opacity: 0;
+    transition: all .3s linear;
+    height: 0;
+    max-height: 0px;
   }
   .hidden {
     overflow: hidden;
   }
   .hidden .header-nav{
-  
     bottom: 0;
-    
     z-index: 10;
   }
   .hidden .header-nav>div{
       display: flex;
       height: 100vh;
+      max-height: 100vh;
+      opacity: 1;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
