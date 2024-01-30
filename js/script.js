@@ -29,42 +29,79 @@ var swiper = new Swiper('.blog-slider', {
     });
 
 
-    document.addEventListener("scroll", function() {
+
+
+    window.addEventListener("scroll", function () {
       var scroll = window.scrollY || document.documentElement.scrollTop;
+      var drop = document.getElementById("drop");
     
       if (scroll > 100) {
-        document.getElementById("drop").classList.add("active");
+        drop.classList.add("active");
       } else if (scroll < 80) {
-        document.getElementById("drop").classList.remove("active");
+        drop.classList.remove("active");
       }
     });
     
     function toggleMenu() {
       var drop = document.getElementById("drop");
-      var nav = document.querySelectorAll(".burger span");
+      var nav = document.querySelector(".nav-links");
       var body = document.body;
     
-      drop.addEventListener("click", function() {
-        nav.forEach(i => {
-          i.classList.toggle("open");
-        })
+      function handleMenuToggle() {
+        nav.classList.toggle("open");
         drop.querySelector("span").classList.toggle("open");
         body.classList.toggle("hidden");
         window.scrollTo(0, 0); // cheating
-      });
+      }
     
-      var navLinks = document.querySelector(".nav-links ~ ul li");
-      navLinks.forEach(function(link) {
-        link.addEventListener("click", function() {
-          nav.forEach(i => {
-            i.classList.toggle("open");
-          })
-          drop.querySelector("span").classList.toggle("open");
-          body.classList.toggle("hidden");
-          window.scrollTo(0, 0); // cheating
-        });
+      drop.addEventListener("click", handleMenuToggle);
+    
+      var navLinks = document.querySelectorAll(".nav-links ~ ul li");
+      navLinks.forEach(function (link) {
+        link.addEventListener("click", handleMenuToggle);
       });
     }
     
     // Call the toggleMenu function when the DOM is fully loaded
     document.addEventListener("DOMContentLoaded", toggleMenu);
+    
+
+    // document.addEventListener("scroll", function() {
+    //   var scroll = window.scrollY || document.documentElement.scrollTop;
+    
+    //   if (scroll > 100) {
+    //     document.getElementById("drop").classList.add("active");
+    //   } else if (scroll < 80) {
+    //     document.getElementById("drop").classList.remove("active");
+    //   }
+    // });
+    
+    // function toggleMenu() {
+    //   var drop = document.getElementById("drop");
+    //   var nav = document.querySelectorAll(".burger span");
+    //   var body = document.body;
+    
+    //   drop.addEventListener("click", function() {
+    //     nav.forEach(i => {
+    //       i.classList.toggle("open");
+    //     })
+    //     drop.querySelector("span").classList.toggle("open");
+    //     body.classList.toggle("hidden");
+    //     window.scrollTo(0, 0); // cheating
+    //   });
+    
+    //   var navLinks = document.querySelector(".nav-links ~ ul li");
+    //   navLinks.forEach(function(link) {
+    //     link.addEventListener("click", function() {
+    //       nav.forEach(i => {
+    //         i.classList.toggle("open");
+    //       })
+    //       drop.querySelector("span").classList.toggle("open");
+    //       body.classList.toggle("hidden");
+    //       window.scrollTo(0, 0); // cheating
+    //     });
+    //   });
+    // }
+    
+    // // Call the toggleMenu function when the DOM is fully loaded
+    // document.addEventListener("DOMContentLoaded", toggleMenu);
