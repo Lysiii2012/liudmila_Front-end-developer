@@ -49,7 +49,9 @@ var swiper = new Swiper('.blog-slider', {
     
       function handleMenuToggle() {
         nav.classList.toggle("open");
-        drop.querySelector("span").classList.toggle("open");
+        drop.querySelectorAll("span").forEach(i => {
+          i.classList.toggle("open")
+        });
         body.classList.toggle("hidden");
         window.scrollTo(0, 0); // cheating
       }
