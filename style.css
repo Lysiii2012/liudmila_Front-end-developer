@@ -1248,7 +1248,7 @@ html{
   }
   .hidden .header-nav{
     bottom: 0;
-    z-index: 10;
+    z-index: 100;
   }
   .header-nav>div{
      flex-direction: column;
@@ -1335,7 +1335,8 @@ html{
     top: -7px;
   }
   .blog-slider{
-    margin: 80px 0;
+    margin: 80px auto;
+    box-sizing: border-box;
     height: 600px;
   }
   .skills-container{
