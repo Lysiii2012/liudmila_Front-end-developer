@@ -14,7 +14,6 @@ var swiper = new Swiper('.blog-slider', {
       }
     });
     document.addEventListener("DOMContentLoaded", function () {
-
       const drop = document.getElementById("drop");
       const nav = document.querySelector(".nav-links");
       const body = document.body;
@@ -29,28 +28,23 @@ var swiper = new Swiper('.blog-slider', {
   
       drop.addEventListener("click", toggleMenu);
   
-      const navLinksMenu = document.querySelectorAll(".nav-links ~ ul li");
-      navLinksMenu.forEach(function (link) {
-          link.addEventListener("click", function () {
-              toggleMenu();
-          });
-      });
+      const navLinks = document.querySelectorAll(".nav-links a");
   
-      const linkMob = document.querySelectorAll('.nav-links.open a');
+      function scrollToTarget(targetId) {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+      }
   
-      linkMob.forEach(link => {
+      navLinks.forEach(link => {
           link.addEventListener("click", function (event) {
               event.preventDefault();
               const targetId = link.getAttribute("href").substring(1);
-              const targetElement = document.getElementById(targetId);
-              if (targetElement) {
-                  targetElement.scrollIntoView({ behavior: 'smooth' });
-              }
+              scrollToTarget(targetId);
               toggleMenu();
           });
       });
-  
-      let navLinks = document.querySelectorAll(".nav-links a");
   
       const observerOptions = {
           rootMargin: '0px',
@@ -80,6 +74,7 @@ var swiper = new Swiper('.blog-slider', {
       });
   });
   
+
     
 
     // window.addEventListener("scroll", function () {
