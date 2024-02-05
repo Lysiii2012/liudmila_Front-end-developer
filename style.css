@@ -701,6 +701,10 @@ h3{
 }
 .contact-container{
   padding: 100px 0;
+  background: #dff2ff;
+}
+.blue-box p{
+  margin-bottom: 20px;
 }
 .contact-container h4{
   color: #FFF;
