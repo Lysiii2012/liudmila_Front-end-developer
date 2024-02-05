@@ -14,56 +14,72 @@ var swiper = new Swiper('.blog-slider', {
       }
     });
     document.addEventListener("DOMContentLoaded", function () {
-      // Обработчик для выделения активной ссылки
-    
-      // Обработчик для меню и его закрытия
+
       const drop = document.getElementById("drop");
       const nav = document.querySelector(".nav-links");
       const body = document.body;
-    
+  
       function toggleMenu() {
-        nav.classList.toggle("open");
-        drop.querySelectorAll("span").forEach(i => {
-          i.classList.toggle("open");
-        });
-        body.classList.toggle("hidden");
+          nav.classList.toggle("open");
+          drop.querySelectorAll("span").forEach(i => {
+              i.classList.toggle("open");
+          });
+          body.classList.toggle("hidden");
       }
-    
+  
       drop.addEventListener("click", toggleMenu);
-    
+  
       const navLinksMenu = document.querySelectorAll(".nav-links ~ ul li");
       navLinksMenu.forEach(function (link) {
-        link.addEventListener("click", function () {
-          toggleMenu();
-          // Добавьте другие действия, если необходимо
-        });
+          link.addEventListener("click", function () {
+              toggleMenu();
+          });
       });
-    
+  
       const linkMob = document.querySelectorAll('.nav-links.open a');
-    
+  
       linkMob.forEach(link => {
-        link.addEventListener("click", function (event) {
-          event.preventDefault();
+          link.addEventListener("click", function (event) {
+              event.preventDefault();
+              const targetId = link.getAttribute("href").substring(1);
+              const targetElement = document.getElementById(targetId);
+              if (targetElement) {
+                  targetElement.scrollIntoView({ behavior: 'smooth' });
+              }
+              toggleMenu();
+          });
+      });
+  
+      let navLinks = document.querySelectorAll(".nav-links a");
+  
+      const observerOptions = {
+          rootMargin: '0px',
+          threshold: 0.5
+      };
+  
+      const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  const targetId = entry.target.getAttribute("id");
+                  navLinks.forEach(link => {
+                      link.classList.remove("active");
+                      if (link.getAttribute("href").substring(1) === targetId) {
+                          link.classList.add("active");
+                      }
+                  });
+              }
+          });
+      }, observerOptions);
+  
+      navLinks.forEach(link => {
           const targetId = link.getAttribute("href").substring(1);
           const targetElement = document.getElementById(targetId);
           if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
+              observer.observe(targetElement);
           }
-             toggleMenu();
-        });
       });
-      let navLinks = document.querySelectorAll(".nav-links a");
-    
-      navLinks.forEach(function (link) {
-        link.addEventListener("click", function () {
-          navLinks.forEach(function (link) {
-            link.classList.remove("active");
-          });
-          toggleMenu();
-          this.classList.add("active");
-        });
-      });
-    });
+  });
+  
     
 
     // window.addEventListener("scroll", function () {
