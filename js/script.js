@@ -31,11 +31,16 @@ var swiper = new Swiper('.blog-slider', {
       const navLinks = document.querySelectorAll(".nav-links a");
   
       function scrollToTarget(targetId) {
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-              targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
-      }
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            const targetRect = targetElement.getBoundingClientRect();
+            window.scrollTo({
+                top: window.scrollY + targetRect.top - 60,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
   
       navLinks.forEach(link => {
           link.addEventListener("click", function (event) {
