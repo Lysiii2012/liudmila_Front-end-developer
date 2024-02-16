@@ -941,6 +941,13 @@ body.dark-theme{
   height: 40px;
   top: -1px;
 }
+.dark-theme.hidden .header-tel::before{
+  background: url(./img/tel-d.svg) no-repeat;
+  background-size: contain;
+}
+.dark-theme.hidden .header-tel{
+  color: #fff;
+}
 .dark-theme .contact-container {
   background: linear-gradient(180deg, rgba(92,184,209,1) 36%, rgba(53,73,86,1) 100%);
 }
@@ -950,7 +957,9 @@ body.dark-theme{
 .dark-theme footer p{
   color: var(--pink);
 }
-
+.dark-theme .contact-container li a svg{
+  background: #fff;
+}
 @media screen and (max-width:1780px) {
   p{
     font-size: 18px;
@@ -1491,13 +1500,20 @@ body.dark-theme{
     height: 600px;
   }
   .skills-container{
-    padding: 60px 0;
+    padding: 60px 0 10px;
+  }
+  #contact{
+    padding: 30px 0;
+  }
+  .contact-container li a svg{
+    width: 40px;
+    height: 40px;
   }
   .call-back-container{
     padding: 30px 0;
   }
   .blog-slider__img{
-    height: 60%;
+    height: 52%;
   }
   .contact-container .container>div{
     flex-direction: column;
@@ -1541,7 +1557,7 @@ body.dark-theme{
     right: 0;
   }
   .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
-    top: 40%;
+    top: 35%;
   }
 }
 @media screen and (max-width: 575px){
